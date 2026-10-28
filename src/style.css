@@ -1,0 +1,93 @@
+/* Fullscreen installation: no margins, no scrollbars, nothing selectable, canvas fills the window. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;              /* no scrolling, ever */
+  overscroll-behavior: none;
+  background: #04060f;           /* same dark as the artwork, so there is never a flash of another colour */
+  font-family: system-ui, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+ 
+#stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none;
+}
+ 
+/* The mouse cursor disappears after 2 seconds without movement (set by main.js). */
+body.hide-cursor {
+  cursor: none;
+}
+ 
+/* The webcam must keep running, but nobody should ever see it (exhibition mode). */
+#cam {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleX(-1);         /* mirrored, like the creature */
+}
+ 
+/* Development mode (D key): small camera preview in the bottom-left corner. */
+body.debug #cam {
+  left: 12px;
+  top: auto;
+  bottom: 12px;
+  width: 240px;
+  height: auto;
+  opacity: 1;
+  border-radius: 8px;
+  z-index: 5;
+}
+ 
+/* Development mode text (FPS, status...). Hidden in exhibition mode. */
+#debugPanel {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  margin: 0;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #9fffd8;
+  font: 14px/1.5 ui-monospace, Consolas, monospace;
+  border-radius: 8px;
+  pointer-events: none;
+}
+#debugPanel.hidden {
+  display: none;
+}
+ 
+/* Messages: in exhibition mode only errors are shown (camera denied...). */
+#status {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: rgba(40, 60, 110, 0.85);
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.6s;
+}
+#status.error {
+  background: rgba(190, 40, 70, 0.92);
+}
+#status.hidden {
+  opacity: 0;
+}
+ 

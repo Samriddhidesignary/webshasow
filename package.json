@@ -1,0 +1,17 @@
+{
+  "name": "web-creature",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.14"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
